@@ -1,0 +1,26 @@
+[
+    {
+        "barcode": "OMU5P1",
+        "brand": "iPhone",
+        "model": "S25 Ultra",
+        "quantity": 3
+    },
+    {
+        "barcode": "OC75P0J",
+        "brand": "Redmi",
+        "model": "Mi 20 Ultra",
+        "quantity": 1
+    },
+    {
+        "barcode": "PL9BCV7",
+        "brand": "Oppo",
+        "model": "Z Flip 4Ultra",
+        "quantity": 5
+    },
+    {
+        "barcode": "AHD7H",
+        "brand": "Samsung",
+        "model": "15 Pro max",
+        "quantity": 5
+    }
+]

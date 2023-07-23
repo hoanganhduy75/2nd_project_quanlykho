@@ -1,0 +1,28 @@
+[
+    {
+        "barcode": "OMU5P1",
+        "brand": "iPhone",
+        "model": "S25 Ultra",
+        "quantity": 3
+    },
+    {
+        "barcode": "OC75P0J",
+        "brand": "Redmi",
+        "model": "Mi 20 Ultra",
+        "quantity": 1
+    },
+    {
+        "barcode": "PL9BCV7",
+        "brand": "Oppo",
+        "model": "Z Flip 4Ultra",
+        "quantity": 5
+    },
+    {
+        "barcode": "OC75P0J",
+        "brand": "Redmi",
+        "date": "Tue Mar 28 10:16:07 2023\n",
+        "model": "Mi 20 Ultra",
+        "quantity": 1,
+        "reason": "Sold"
+    }
+]
