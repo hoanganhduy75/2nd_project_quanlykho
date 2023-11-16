@@ -1,4 +1,5 @@
 # 2nd_project_quanlykho
+# quản lý kho
 install opencv, zbar through homebrew.
 
 using nolohmann-json header.
