@@ -5,7 +5,6 @@
 **Fearture**
 - Import/Export product by Barcode/Keyboard.
 - View/Search product.
-- 
 
 **Requirement**
 - Install Opencv, Zbar through Homebrew.
@@ -15,6 +14,7 @@
 - You may need to change some configuratons in Xcode for project to run:
   + Check header and library path in target.
   + Re-import Framwork and Libaries under target "Project"->General.
+  + Change "data.json" and ""delete.json" files path in "main.cpp".
 
 **Subject**: Programming Techniques
 
