@@ -8,7 +8,10 @@
 //#include <opencv2/imgcodecs.hpp>
 //#include <opencv2/highgui.hpp>
 //#include <opencv2/imgproc.hpp>
+#include <iomanip>
 #include <opencv2/opencv.hpp>
+#include <zbar.h>
+
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -17,9 +20,10 @@
 #include <vector>
 #include <ctime>
 #include <unistd.h>
-#include <iomanip>
+#include <filesystem>
 
-#include <zbar.h>
+
+
 using namespace cv;
 using namespace zbar;
 
@@ -51,6 +55,76 @@ vector<struct phone> phones_list;
 vector<struct deletePhone> delete_phones_list;
 time_t now = time(0);
 
+int menu();
+bool feature1(fstream &data, json &js, int count);
+bool feature2(json js, int count);
+bool feature3(fstream &data, json &js, int count);
+void readJsonFile(fstream &data, json js);
+void writeJsonFile(fstream &data, json js);
+void printPhoneList();
+void printPhone(auto &obj);
+void filProduct(string key, string value, json js);
+void filProduct(string key, int value, json js);
+void delete_Phone(int countEle);
+
+string gen_random(const int len);
+bool is_number(const std::string &s);
+bool decode(Mat &im, vector<decodedObject> &decodedObjects);
+
+
+
+/*/---------Main------------*/
+int main() {
+    begin:
+    delete_phones_list.clear();
+    phones_list.clear();
+    int count = 0;
+    srand((unsigned)time(NULL) * getpid());
+    system("clear");
+    fstream data("/Users/yudhna_/Warehouse-management_2nd-Project/data.json");
+    json js = json::parse(data);
+    if (data.is_open())
+    {
+        readJsonFile(data, js);
+        int selected = menu();
+        count++;
+        switch (selected)
+        {
+            case 0:
+                while(feature1(data,js,count))
+                {
+                }
+                data.close();
+                goto begin;
+                break;
+            case 1:
+//                count = 0;
+                while (feature2(js,count)) {
+                }
+                data.close();
+                goto begin;
+                break;
+            case 2:
+//                count = 0;
+                while(feature3(data, js,count))
+                {
+//                    count1 ++;
+                }
+                data.close();
+                goto begin;
+                break;
+            case 3:
+                cout << "Xin tam biet" << endl;
+                data.close();
+                break;
+            default:
+                cout << "Co bugggg" << endl;
+                break;
+        }
+    }
+    else
+        cout << "Chuong trinh co loi";
+}
 //Generate random string for barcode
 string gen_random(const int len) {
     static const char alphanum[] =
@@ -130,7 +204,7 @@ void readJsonFile(fstream &data, json js) {
 void writeJsonFile(fstream &data, json js)
 {
     if (data.is_open()) {
-        ofstream data("/Users/yudhna_/Desktop/Project/Project_OK/data.json", ios::trunc);
+        ofstream data("/Users/yudhna_/Warehouse-management_2nd-Project/data.json", ios::trunc);
         data << std::setw(4) << std::setfill(' ') << js;
         data.close();
     }
@@ -292,8 +366,7 @@ bool feature1(fstream &data, json &js, int count)
         {
             Mat image, bbox, image2;
             namedWindow("Scan_Window",WINDOW_NORMAL);
-            VideoCapture cap(0);
-            cap = VideoCapture("http://yudhna.local:8081/video");
+            VideoCapture cap(1);
             if (!cap.isOpened()) {
                 cout << "cannot open camera";
             }
@@ -563,7 +636,7 @@ again:
             delete_phones_list.push_back(phone);
         }
     }
-    fstream deletef("/Users/yudhna_/Desktop/Project/Project_OK/data.json");
+    fstream deletef("/Users/yudhna_/Warehouse-management_2nd-Project/data.json");
     json delete_js = json::parse(deletef);
     for(auto &obj : delete_phones_list)
     {
@@ -577,7 +650,7 @@ again:
         });
     }
     if (deletef.is_open()) {
-        ofstream deletef("/Users/yudhna_/Desktop/Project/Project_OK/delete.json", ios::trunc);
+        ofstream deletef("/Users/yudhna_/Warehouse-management_2nd-Project/delete.json", ios::trunc);
         deletef << std::setw(4) << std::setfill(' ') << delete_js;
         deletef.close();
         char cont;
@@ -593,56 +666,4 @@ again:
         cout << "Loi mo file feature 3";
     }
     return false;
-}
-/*/---------Main------------*/
-int main() {
-    begin:
-    delete_phones_list.clear();
-    phones_list.clear();
-    int count = 0;
-    srand((unsigned)time(NULL) * getpid());
-    system("clear");
-    fstream data("/Users/yudhna_/Desktop/Project/Project_OK/data.json");
-    json js = json::parse(data);
-    if (data.is_open())
-    {
-        readJsonFile(data, js);
-        int selected = menu();
-        count++;
-        switch (selected)
-        {
-            case 0:
-                while(feature1(data,js,count))
-                {
-                }
-                data.close();
-                goto begin;
-                break;
-            case 1:
-//                count = 0;
-                while (feature2(js,count)) {
-                }
-                data.close();
-                goto begin;
-                break;
-            case 2:
-//                count = 0;
-                while(feature3(data, js,count))
-                {
-//                    count1 ++;
-                }
-                data.close();
-                goto begin;
-                break;
-            case 3:
-                cout << "Xin tam biet" << endl;
-                data.close();
-                break;
-            default:
-                cout << "Co bugggg" << endl;
-                break;
-        }
-    }
-    else
-        cout << "Chuong trinh co loi";
 }

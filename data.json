@@ -22,5 +22,17 @@
         "brand": "Samsung",
         "model": "15 Pro max",
         "quantity": 5
+    },
+    {
+        "barcode": "IMV5P5K",
+        "brand": "Xiaomi",
+        "model": "K50 5G",
+        "quantity": 1
+    },
+    {
+        "barcode": "IMV5P5K",
+        "brand": "Xiaomi",
+        "model": "K50 5G",
+        "quantity": 1
     }
 ]
