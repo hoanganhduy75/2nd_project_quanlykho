@@ -16,6 +16,8 @@
   + Re-import Framwork and Libaries under target "Project"->General.
   + Change "data.json" and ""delete.json" files path in "main.cpp".
 
+**Language**: C++
+
 **Subject**: Programming Techniques
 
 **Demo**
